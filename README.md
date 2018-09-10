@@ -8,7 +8,7 @@ Though it’s possible to stop the execution from a filter, there’s no way to 
 
 ## The issue
 
-If you take a look into `FunctionsFilterHttpIssue.Filter.BannedNameAttribute`, you’ll notice it throws an ArgumentException when ever the client passes a banned name (that is part of the BannedNames array). If we were about to translate it into common HTTP terms, that would be a 400 - Bad Request, right?
+If you take a look into `FunctionsFilterHttpIssue.Filter.BannedNameAttribute`, you’ll notice it throws an ArgumentException when ever the client passes a banned name (that is part of the BannedNames array). If we were about to translate it into common HTTP terms, that would be a 403 - Forbidden for instance, right?
 
 However, there’s no way for us to pass any status codes back to the runtime. The runtime interprets all exceptions in our Function as 500 - Internal Server Error, though that’s not entirely right in this case. It’s just an invalid request.
 
@@ -16,8 +16,8 @@ However, there’s no way for us to pass any status codes back to the runtime. T
 
 ![1536579551008](assets/1536579551008.png)
 
-_**Expected behavior**: Pass HTTP 400 back to the client as response plus return the exception message to the response content_
-_**Actual behavior**: Pass HTTP 500 back to the client as response, the response content is completely empty_
+_**Expected behavior**: Pass HTTP 400/403 (or any other status code) back to the client as response plus return the exception message to the response content_
+_**Actual behavior**: Pass HTTP 500 back to the client as response plus don’t provide a response content (the response content is actually completely empty)_
 
 ---
 
