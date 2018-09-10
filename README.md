@@ -34,7 +34,7 @@ public class SampleFilterAttribute : FunctionInvocationFilterAttribute
     public override async Task OnExecutingAsync(FunctionExecutingContext executingContext, CancellationToken cancellationToken) 
     {
         // ...
-        base.Context.Http.Abort(StatusCode.Forbidden, "The name you provided belongs to the banned list of names.");
+        base.Context.Http.Abort(StatusCode.Forbidden, "The name you provided belongs to the list of banned names.");
         // This aborts the whole request and returns a HTTP response with the status code and the error message as body content.
     }
 }
@@ -52,7 +52,7 @@ public class SampleFilterAttribute : FunctionInvocationFilterAttribute
     public override async Task OnExecutingAsync(FunctionExecutingContext executingContext, CancellationToken cancellationToken) 
     {
         // ...
-        throw new FilterHttpException(StatusCode.Forbidden, "The name you provided belongs to the banned list of names.");
+        throw new FilterHttpException(StatusCode.Forbidden, "The name you provided belongs to the list of banned names.");
         
         // This returns a proper HTTP response when ever this Filter is being called by a HTTP trigger.
         // If that's not the case -> Log it somewhere with its status code and handle it as common exception.
