@@ -2,7 +2,7 @@
 
 The current Azure Functions runtime provides a way to run certain checks before the actual function is being executed. This allows us to use it in specific scenarios like authorization, request filtering, validation and so on.
 
-These checks are known as Filters, a well known concept adopted from ASP.NET. Filters are being built as attributes. Filters can be triggered by HTTP request or any other Function triggers, making them universal to use.
+These checks are known as [Filters](https://github.com/Azure/azure-webjobs-sdk/wiki/Function-Filters), a well known concept adopted from ASP.NET. Filters are being built as attributes. Filters can be triggered by HTTP requests or any other Function triggers, making them universal to use.
 
 Though it’s possible to stop the execution from a filter, there’s no way to respond to a HTTP request and tell what exactly happened other than just providing an Internal Server Error (500) as HTTP response by default. This is the scope of this repository.
 
