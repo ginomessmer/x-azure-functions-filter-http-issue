@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2019
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunctionsFilterHttpIssue", "FunctionsFilterHttpIssue\FunctionsFilterHttpIssue.csproj", "{2BCC1B16-6420-4D6E-8726-7AB8B147F70D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FunctionsFilterHttpIssue", "FunctionsFilterHttpIssue\FunctionsFilterHttpIssue.csproj", "{2BCC1B16-6420-4D6E-8726-7AB8B147F70D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FunctionsFilterHttpIssue.Client", "FunctionsFilterHttpIssue.Client\FunctionsFilterHttpIssue.Client.csproj", "{B3A47A7F-650B-41CB-8886-52EA2ECC3754}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{2BCC1B16-6420-4D6E-8726-7AB8B147F70D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2BCC1B16-6420-4D6E-8726-7AB8B147F70D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2BCC1B16-6420-4D6E-8726-7AB8B147F70D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3A47A7F-650B-41CB-8886-52EA2ECC3754}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3A47A7F-650B-41CB-8886-52EA2ECC3754}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3A47A7F-650B-41CB-8886-52EA2ECC3754}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3A47A7F-650B-41CB-8886-52EA2ECC3754}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
