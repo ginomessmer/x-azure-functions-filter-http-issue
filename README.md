@@ -16,8 +16,9 @@ However, there’s no way for us to pass any status codes back to the runtime. T
 
 ![1536579551008](assets/1536579551008.png)
 
-_**Expected behavior**: Pass HTTP 400/403 (or any other status code) back to the client as response plus return the exception message to the response content_
-_**Actual behavior**: Pass HTTP 500 back to the client as response plus don’t provide a response content (the response content is actually completely empty)_
+_**Expected behavior**: Pass HTTP 400/403 (or any other status code) back to the client as response plus return the exception message to the response content._
+
+_**Actual behavior**: Pass HTTP 500 back to the client as response plus don’t provide a response content (the response content is actually completely empty)._
 
 ---
 
