@@ -10,7 +10,7 @@ Though it’s possible to stop the execution from a filter, there’s no way to 
 
 If you take a look into `FunctionsFilterHttpIssue.Filter.BannedNameAttribute`, you’ll notice it throws an ArgumentException when ever the client passes a banned name (that is part of the BannedNames array). If we were about to translate it into common HTTP terms, that would be a 403 - Forbidden for instance, right?
 
-However, there’s no way for us to pass any status codes back to the runtime. The runtime interprets all exceptions in our Function as 500 - Internal Server Error, though that’s not entirely right in this case. It’s just an invalid request.
+However, there’s no way for us to pass any status codes back to the runtime. The runtime interprets all exceptions in our Function as 500 - Internal Server Error, though that’s not entirely right in this case in theory. It’s just an invalid request in this aspect.
 
 
 
@@ -19,6 +19,48 @@ However, there’s no way for us to pass any status codes back to the runtime. T
 _**Expected behavior**: Pass HTTP 400/403 (or any other status code) back to the client as response plus return the exception message to the response content._
 
 _**Actual behavior**: Pass HTTP 500 back to the client as response plus don’t provide a response content (the response content is actually completely empty)._
+
+---
+
+### Possible solutions
+
+Some ideas I have in mind, based on other frameworks and their middlewares I’ve worked with in the past.
+
+#### 1. Provide the HTTP context and inject it to the Filter
+
+```csharp
+public class SampleFilterAttribute : FunctionInvocationFilterAttribute
+{
+    public override async Task OnExecutingAsync(FunctionExecutingContext executingContext, CancellationToken cancellationToken) 
+    {
+        // ...
+        base.Context.Http.Abort(StatusCode.Forbidden, "The name you provided belongs to the banned list of names.");
+        // This aborts the whole request and returns a HTTP response with the status code and the error message as body content.
+    }
+}
+```
+
+
+
+#### 2. Provide a new exception 
+
+… that automatically turns the exception into a HTTP response when applicable:
+
+```csharp
+public class SampleFilterAttribute : FunctionInvocationFilterAttribute
+{
+    public override async Task OnExecutingAsync(FunctionExecutingContext executingContext, CancellationToken cancellationToken) 
+    {
+        // ...
+        throw new FilterHttpException(StatusCode.Forbidden, "The name you provided belongs to the banned list of names.");
+        
+        // This returns a proper HTTP response when ever this Filter is being called by a HTTP trigger.
+        // If that's not the case -> Log it somewhere with its status code and handle it as common exception.
+    }
+}
+```
+
+
 
 ---
 
